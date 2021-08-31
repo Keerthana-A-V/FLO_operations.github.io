@@ -23,7 +23,7 @@ sm-button{
 }
 
 .popup{
-    color:blueviolet;
+    color:var(--accent-color);
     text-decoration: underline;
     cursor: pointer;
 }

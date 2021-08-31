@@ -1,0 +1,155 @@
+
+.main_block {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-group {
+  background-color: #fff;
+  max-width: 1000px;
+  width: 90%;
+  padding: 1.5em;
+}
+
+sm-input {
+  margin-bottom: 1em;
+}
+
+sm-button {
+  margin-top: 1rem;
+}
+
+
+.scroll {
+  overflow-x: scroll;
+}
+.demoArea {
+  padding: 1em;
+  max-width: 600px;
+}
+
+.demo-inner-blocks,
+.descriptionBlocks,
+.syntax {
+  width: 100%;
+}
+
+.keyValuePairs {
+  margin-top: 1em;
+}
+
+.pairs {
+  display: flex;
+  align-items: center;
+  margin-top: 1em;
+}
+
+.object-inner-blocks {
+  margin-right: 1em;
+}
+
+.plus {
+  font-size: 2rem;
+  background-color: rgba(var(--text-color), 0.06);
+  color: #696969;
+  width: 1em;
+  height: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-top: -15px;
+}
+
+h1 {
+  border-bottom: 1px solid #000;
+  padding-bottom: 0.5em;
+  font-size: 2.5rem;
+}
+
+
+sm-tab {
+  padding: 0.35em;
+}
+.read{
+  color: var(--accent-color);
+  cursor:pointer;
+  text-decoration: underline;
+}
+.line {
+  width: 100%;
+  height: 0.5px;
+  background-color: #000;
+  margin-top: -0.75em;
+}
+
+.optionsHeading {
+  text-align: center;
+}
+.smcrsl{
+  text-decoration: none;
+  cursor: pointer;
+}
+@media (max-width: 320px) {
+  .plus {
+    font-size: 1.5rem;
+    background-color: rgba(var(--text-color), 0.06);
+    color: #696969;
+    width: 3em;
+    height: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  h1 {
+    border-bottom: 1px solid #000;
+    padding-bottom: 0.5em;
+    font-size: 1.5rem;
+  }
+}
+
+@media (min-width: 321px) and (max-width: 376px) {
+  .plus {
+    font-size: 1.5rem;
+    background-color: rgba(var(--text-color), 0.06);
+    color: #696969;
+    width: 2.5em;
+    height: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  h1 {
+    border-bottom: 1px solid #000;
+    padding-bottom: 0.5em;
+    font-size: 1.75rem;
+  }
+}
+
+@media (min-width: 376px) and (max-width: 576px) {
+  .plus {
+    font-size: 1.5rem;
+    background-color: rgba(var(--text-color), 0.06);
+    color: #696969;
+    width: 2em;
+    height: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  h1 {
+    border-bottom: 1px solid #000;
+    padding-bottom: 0.5em;
+    font-size: 2rem;
+  }
+}
