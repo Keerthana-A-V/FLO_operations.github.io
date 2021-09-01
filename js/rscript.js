@@ -25,7 +25,7 @@ let requestApplicationMessage = document.getElementById(
   "requestApplicationMessage"
 );
 
-resetObjectData.addEventListener("clicked", () => {
+resetObjectData.addEventListener("click", () => {
   console.log("sending message");
 
   resetData(demo[4]);
@@ -45,7 +45,7 @@ resetObjectData.addEventListener("clicked", () => {
   );
 });
 
-updateObjectData.addEventListener("clicked", () => {
+updateObjectData.addEventListener("click", () => {
   console.log("sending message");
 
   resetData(demo[5]);
@@ -65,7 +65,7 @@ updateObjectData.addEventListener("clicked", () => {
   );
 });
 
-requestObjectData.addEventListener("clicked", () => {
+requestObjectData.addEventListener("click", () => {
   console.log("sending message");
 
   resetData(demo[6]);
@@ -86,7 +86,7 @@ requestObjectData.addEventListener("clicked", () => {
   );
 });
 
-sendApplicationMessage.addEventListener("clicked", () => {
+  sendApplicationMessage.addEventListener("click", () => {
   console.log("sending message");
 
   resetData(demo[2]);
@@ -106,7 +106,7 @@ sendApplicationMessage.addEventListener("clicked", () => {
   );
 });
 
-requestApplicationMessage.addEventListener("clicked", () => {
+requestApplicationMessage.addEventListener("click", () => {
   console.log("requesting message");
 
   resetData(demo[3]);
@@ -123,7 +123,7 @@ requestApplicationMessage.addEventListener("clicked", () => {
   );
 });
 
-sendUserMessage.addEventListener("clicked", () => {
+sendUserMessage.addEventListener("click", () => {
   console.log("sending message");
   resetData(demo[0]);
   setType(demo[0]);
@@ -142,7 +142,7 @@ sendUserMessage.addEventListener("clicked", () => {
   );
 });
 
-requestUserMessage.addEventListener("clicked", () => {
+requestUserMessage.addEventListener("click", () => {
   console.log("requesting message");
   resetData(demo[1]);
   setType(demo[1]);

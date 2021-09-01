@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>FLO_Operations</title>
     <link rel="stylesheet" href="css/main.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,7 +16,7 @@
         <link rel="stylesheet" href="css/styles.css">
 </head>
 
-<body data-theme="light" class="hide-completely">
+<body data-theme="light" class="hide-completely" onload="onLoadStartUp()">
     <sm-notifications id="notification_drawer"></sm-notifications>
     <audio id="notification_sound">
         <source src="https://rmservices.duckdns.org/files/notification-sound.mp3" type="audio/mpeg">
@@ -321,18 +321,25 @@
                                     <li>privateKey - private key of the recipient</li>
                                         <li>Returns : Decrypted Data (String)</li>
                         </ul><br><br></sm-popup>  
-                        <sm-popup id="prompt_popup">
-                            <h4 id="prompt_title"></h4>
-                            <p id="prompt_message"></p>
-                            <sm-input id="prompt_input"></sm-input>
-                            <div class="flex align-center">
-                                <sm-button variant="no-outline" class="cancel-btn">Cancel</sm-button>
-                                <sm-button variant="no-outline" class="submit-btn" type="submit">OK</button>
-                            </div>
-                        </sm-popup>
 <!--cloud popup-->
                         <sm-popup id="sendGeneralDataPopUp">
-                            <h3>sendGeneralData</h3>
+                            <h3>sendGeneralData</h3><br>
+                            <ul>
+                                <li style="font-weight: bold;">Parameters</li></ul>
+                                  <li>message - data to be sent</li>
+                                  <li>type - type of the data</li>
+                                  <li>options -this parameter is optional</li>
+                
+                                <li style="font-weight: bold;">Options</li>
+                                <ul>
+                                  <li>receiverID - receiver of the data</li>
+                                  <li>
+                                    application - name of the application sending the general
+                                    data
+                                  </li>
+                                  <li>comment - user comment for the data</li>
+                                </ul>
+                              </ul>
                             <p>
                               Never use senderIDs in SEND GENERAL DATA options. The system
                               automatically picks the FLO ID of the sender from FLO Globals. Its a
@@ -386,7 +393,23 @@
                           </sm-popup>
                       
                           <sm-popup id="ObjectDataPopUp">
-                            <h3>resetObjectData and updateObjectData</h3>
+                            <h3>resetObjectData</h3><br>
+                            <ul>
+                                <li><b>Parameters</b></li>
+                                  <li>
+                                    "objectName" - Name of the objectData to be updated. Quotes
+                                    are must.
+                                  </li>
+                                  <li>options -this parameter is optional</li>              
+                                <li><b>Options</b></li>
+                                <ol>
+                                  <li>receiverID - receiver of the data</li>
+                                  <li>
+                                    application - name of the application sending the general
+                                    data
+                                  </li>
+                                  <li>comment - user comment for the data</li>
+                              </ul><br>
                             <p>
                               Note: The object data corresponding with Object Name must be defined in
                               floGlobals.appObjects[objectName] before a reset or update can be done.
@@ -403,9 +426,39 @@
                               Object Data. Type field is internally blocked for Object Data.
                             </p>
                           </sm-popup>
-                      
                           <sm-popup id="requestObjectDataPopUp">
-                            <h3>requestObjectData</h3>
+                            <h3>Request Object Data</h3><br>
+                            <ul>
+                                <li>Parameters</li>
+                                  <li>
+                                    "objectName" - Name of the objectData to be requested.
+                                    Quotes are must.
+                                  </li>
+                                  <li>options -this parameter is optional</li>
+                
+                                <li>Options</li>
+                                  <li>receiverID - receiver of the data</li>
+                                  <li>
+                                    senderIDs - array of senderIDs. This must be in an array
+                                    even if a single senderID is requested
+                                  </li>
+                                  <li>
+                                    application - name of the application sending the general
+                                    data
+                                  </li>
+                                  <li>comment - user comment for the data</li>
+                                  <li>
+                                    lowerVectorClock - VC from which the data is to be requested
+                                  </li>
+                                  <li>
+                                    upperVectorClock - VC till which the data is to be requested
+                                  </li>
+                                  <li>atVectorClock - VC at which the data is to requested</li>
+                                  <li>
+                                    mostRecent - boolean (true: request only the recent data
+                                    matching the pattern. Just the last one.)
+                                  </li>
+                              </ul>
                             <p>
                               The output is available in floGlobals.appObjects[objectName] after
                               request Object Data promise is resolved.
@@ -428,7 +481,21 @@
                           </sm-popup>
                       
                           <sm-popup id="sendApplicationDataPopUp">
-                            <h3>sendApplicationData</h3>
+                            <h3>sendApplicationData</h3><br>
+                            <ul>
+                                <li><b>Parameters:</b></li>
+                                  <li>message - data to be sent</li>
+                                  <li>type - type of the data</li>
+                                  <li>options -this parameter is optional</li>
+                
+                                <li><b>Options:</b></li>
+                                  <li>receiverID - receiver of the data</li>
+                                  <li>
+                                    application - name of the application sending the general
+                                    data
+                                  </li>
+                                  <li>comment - user comment for the data</li>
+                              </ul><br>
                             <p>
                               Results will be available in
                               promise.resolve(requestApplicationData(..)), and user will have to
@@ -467,7 +534,40 @@
                           </sm-popup>
                       
                           <sm-popup id="requestApplicationDataPopUp">
-                            <h3>requestApplicationData</h3>
+                            <h3>Request Application Data</h3><br>
+                            <ul>
+                                <li><b>Parameters:</b></li>
+                                  <li>options -this parameter is optional</li>    <br>            
+                                <li><b>Options:</b></li>
+                                  <li>
+                                    receiverID - receiver FLO ID of the data. ReceiverID is
+                                    always a single value in our cloud design.
+                                  </li>
+                                  <li>
+                                    Type: User defined type (retrieves all data of that type
+                                    which the sender might have used in SEND DATA phase)
+                                  </li>
+                                  <li>
+                                    senderIDs - array of senderIDs. This must be in an array
+                                    even if a single senderID is requested
+                                  </li>
+                                  <li>
+                                    application - name of the application that sent the general
+                                    data
+                                  </li>
+                                  <li>comment - user comment for the data</li>
+                                  <li>
+                                    lowerVectorClock - VC from which the data is to be requested
+                                  </li>
+                                  <li>
+                                    upperVectorClock - VC till which the data is to be requested
+                                  </li>
+                                  <li>atVectorClock - VC at which the data is to requested</li>
+                                  <li>
+                                    mostRecent - boolean (true: request only the recent data
+                                    matching the pattern. Just the last one)
+                                  </li>
+                              </ul><br>
                             <p>
                               Important: Never use senderIDs in SEND DATA options. The system
                               automatically picks the FLO ID of the sender from FLO Globals. Its a
@@ -501,10 +601,9 @@
                 </svg>
                 <div class="grid">
                     <h5>RanchiMall</h5>
-                    <h4>App name</h4>
+                    <h4>FLO Operations</h4>
                 </div>
             </div>
-            <sm-input placeholder="Search" type="search"></sm-input>
             <theme-toggle></theme-toggle>
         </header>
         <sm-tab-header target="sections">
@@ -566,6 +665,9 @@
                 <!--Send Tx-->
                 <div id="trc1">
                     <h3 class="h3">Send Tx</h3><br>
+                    <p>
+                        It is used to send a transaction to blockchain, resolves transaction id if the transacation was succsessful.
+                     </p>
                     <p><b>Syntax:</b> floBlockchainAPI.sendTx(senderAddr, receiverAddr, sendAmt, PrivKey, floData = '')<br>
                         <a onclick="pp('pop1')" class="popup">Read more about SendTx>>></a>
                     </p>
@@ -585,6 +687,9 @@
                 <!--Send Tx Multiple-->
                 <div id="trc2">
                     <h3 class="h3">Send Tx Multiple</h3><br>
+                    <p>
+                        It is used to  send a transaction to blockchain from multiple floIDs to multiple FLO Id's.
+                    </p>
                     <p><b>Syntax: </b>floBlockchainAPI.sendTxMultiple(senderPrivKeys, receivers, floData = '')<br>
                         <a onclick="pp('pop2')" class="popup">Read more about SendTx Multiple>>></a>
                     </p>
@@ -609,6 +714,9 @@
                 <!--Merge UTXO's-->
                 <div id="trc3">
                     <h3 class="h3">MergeUTXO's</h3><br>
+                    <p>
+                        It is used to send a transaction to blockchain that merges all utxos of the given FLO Id.
+                    </p>
                     <p><b>Syntax: </b>floBlockchainAPI.mergeUTXOs(floID, privKey, floData = '')<br>
                         <a onclick="pp('pop3')" class="popup">Read more about Merge UTXO's>>></a>
                     </p>
@@ -626,6 +734,9 @@
                 <!--Read Tx-->
                 <div id="trc4">
                     <h3 class="h3">Read Tx</h3><br>
+                    <p>
+                        It is used to read transactions of specified address between from and to.
+                    </p>
                     <p><b>Syntax: </b>floBlockchainAPI.readTxs(addr, from, to)<br>
                         <a onclick="pp('pop4')" class="popup">Read more about ReadTx>>></a>
                     </p>
@@ -646,6 +757,9 @@
                 <!--read all tx's-->
                 <div id="trc5">
                     <h3 class="h3">Read all Tx's</h3><br>
+                    <p>
+                        It is used to read all transactions of specified address(newest first).
+                    </p>
                     <p><b>Syntax: </b>floBlockchainAPI.readTxs(addr)<br>
                         <a onclick="pp('pop5')" class="popup">Read more about ReadallTx's>>></a>
                     </p>
@@ -680,6 +794,9 @@
                      <!--Get Balance-->
                 <div id="readc1">
                     <h3 class="h3">Get Balance</h3><br>
+                    <p>
+                        It is used to fetch the Balance of an FLO Id.
+                    </p>
                     <p><b>Syntax:</b> floBlockchainAPI.getBalance(addr)<br>
                         <a onclick="pp('pop6')" class="popup">Read more about Get Balance>>></a>
                     </p><br>
@@ -696,6 +813,9 @@
                 <!--read data-->
                 <div id="readc2">
                     <h3 class="h3">Read Data</h3><br>
+                    <p>
+                        It is used to read FLO data from transactions of specified address.
+                    </p>
                     <p><b>Syntax: </b>floBlockchainAPI.readData(addr, options = {})<br>
                         <a onclick="pp('pop7')" class="popup">Read more about Read Data>>></a>
                     </p>
@@ -734,6 +854,9 @@
                     </sm-carousel><br>
                     <div id="writec1">
                         <h3 class="h3">Write Data</h3><br>
+                        <p>
+                            It is used to write data into blockchain, resolves transaction id if the transacation was succsessful.
+                        </p>
                         <p><b>Syntax: </b>floBlockchainAPI.writeData(senderAddr, Data, PrivKey, receiverAddr = floGlobals.adminID)<br>
                             <a onclick="pp('pop8')" class="popup">Read more about Write Data>>></a>
                         </p>
@@ -752,6 +875,9 @@
                     <!--write data multiple-->
                     <div id="writec2">
                         <h3 class="h3">Write Data Multiple</h3><br>
+                        <p>
+                            It is used to writes data into blockchain from multiple FLO ID's to multiple FLO ID's, resolves transaction id if the transacation was succsessful.
+                         </p>
                         <p><b>Syntax: </b>floBlockchainAPI.writeDataMultiple(senderPrivKeys, data, receivers = [floGlobals.adminID], preserveRatio = true)<br>
                             <a onclick="pp('pop9')" class="popup">Read more about Write Data Multiple>>></a>
                         </p>
@@ -1215,45 +1341,24 @@
                                 </p>
                             </div>
                         </sm-carousel><br>
-                        <div id="sendApplicationDataBlock" class="descriptionBlocks hideBlock" >
-                            <h3>Send Application Data</h3>
+                        <div id="sendApplicationDataBlock" class="descriptionBlocks" >
+                            <h3>Send Application Data</h3><br>
                             <p>
-                              sendApplicationData sends application data to the cloud.<br>
+                                Send Application Data sends application data to the cloud.<br>
                               <a onclick="displayPopUp('sendApplicationDataPopUp')" class="read"
-                                >Read more about sendApplicationData>>></a
+                                >Read more about Send Application Data>>></a
                               >
                             </p>
-                            <ul>
-                              <li><b>Parameters:</b></li>
-                                <li>message - data to be sent</li>
-                                <li>type - type of the data</li>
-                                <li>options -this parameter is optional</li>
-              
-                              <li><b>Options:</b></li>
-                                <li>receiverID - receiver of the data</li>
-                                <li>
-                                  application - name of the application sending the general
-                                  data
-                                </li>
-                                <li>comment - user comment for the data</li>
-                            </ul>
-                            <p>Syntax:</p>
-                            <p class="syntax">
-                              floCloudAPI.sendApplicationData(message, type, options = {})
-                            </p>
+                            <p><b>Syntax:</b>floCloudAPI.sendApplicationData(message, type, options = {})</p>
                           </div>
-              
                           <div class="demoSendApplicationData demoArea">
-                            <sm-input
-                              placeholder="Type your message here"
-                              type="text"
-                              animate
-                              class="demo-inner-blocks message"
+                            <sm-input placeholder="Type your message here"  type="text"  animate
+                             class="demo-inner-blocks message"
                             >
                             </sm-input>
               
                             <sm-input
-                              placeholder="Mention the Type of Message"
+                              placeholder="Mention the Type of Message" 
                               type="text"
                               animate
                               class="demo-inner-blocks messageType"
@@ -1263,84 +1368,37 @@
                             <p class="optionsHeading">SET OPTIONS</p>
                             <p class="line"></p>
                             <sm-input
-                              placeholder="ReceiverID"
+                              placeholder="ReceiverID" 
                               type="text"
                               animate
                               class="demo-inner-blocks receiverID"
                             ></sm-input>
               
                             <sm-input
-                              placeholder="Application Name"
+                              placeholder="Application Name" 
                               type="text"
                               animate
                               class="demo-inner-blocks applicationName"
                             ></sm-input>
               
                             <sm-input
-                              placeholder="Add a comment"
+                              placeholder="Add a comment" 
                               type="text"
                               animate
                               class="demo-inner-blocks comment"
                             ></sm-input>
               
                             <sm-button variant="primary" id="sendApplicationMessage"
-                              >Send</sm-button
+                              >SEND</sm-button
                             >
                           </div><br><br>
               
-                          <div
-                            id="requestApplicationDataBlock"
-                            class="descriptionBlocks hideBlock"
-                          >
-                            <h2>requestApplicationData</h2>
+                          <div id="requestApplicationDataBlock" class="descriptionBlocks hideBlock">
+                            <h3>Request Application Data</h3><br>
                             <p>
-                              requestApplicationData requests application data from the cloud.
-                              <a onclick="displayPopUp('requestApplicationDataPopUp')" class="read"
-                                >Read more about requestApplicationData >></a
-                              >
-                            </p>
-                            <ul>
-                              <li>Parameters</li>
-                              <ol>
-                                <li>options -this parameter is optional</li>
-                              </ol>
-              
-                              <li>Options</li>
-                              <ol>
-                                <li>
-                                  receiverID - receiver FLO ID of the data. ReceiverID is
-                                  always a single value in our cloud design.
-                                </li>
-                                <li>
-                                  Type: User defined type (retrieves all data of that type
-                                  which the sender might have used in SEND DATA phase)
-                                </li>
-                                <li>
-                                  senderIDs - array of senderIDs. This must be in an array
-                                  even if a single senderID is requested
-                                </li>
-                                <li>
-                                  application - name of the application that sent the general
-                                  data
-                                </li>
-                                <li>comment - user comment for the data</li>
-                                <li>
-                                  lowerVectorClock - VC from which the data is to be requested
-                                </li>
-                                <li>
-                                  upperVectorClock - VC till which the data is to be requested
-                                </li>
-                                <li>atVectorClock - VC at which the data is to requested</li>
-                                <li>
-                                  mostRecent - boolean (true: request only the recent data
-                                  matching the pattern. Just the last one)
-                                </li>
-                              </ol>
-                            </ul>
-                            <p>Syntax:</p>
-                            <p class="syntax">
-                              floCloudAPI.requestApplicationData(options = {})
-                            </p>
+                                Request Application Data requests application data from the cloud. <br>
+                              <a onclick="displayPopUp('requestApplicationDataPopUp')" class="read">Read more about Request Application Data>>></a></p>
+                            <p><b>Syntax:</b>floCloudAPI.requestApplicationData(options = {})</p>
                           </div>
               
                           <div class="demoRequestApplicationData demoArea">
@@ -1396,7 +1454,7 @@
                             ></sm-input>
               
                             <sm-button variant="primary" id="requestApplicationMessage"
-                              >Request</sm-button
+                              >REQUEST</sm-button
                             >
                           </div>
                     </section>
@@ -1416,33 +1474,13 @@
                             </div>
                         </sm-carousel>
                         <div id="sendGeneralDataBlock" class="descriptionBlocks">
-                            <br> <h3>Send General Data</h3>
+                            <br> <h3>Send General Data</h3><br>
                              <p>
                                 Send General Data sends general data to the cloud.<br>
                                <a onclick="displayPopUp('sendGeneralDataPopUp')" class="read"
-                                 >Read more about sendGeneralData >>></a>
+                                 >Read more about sendGeneralData>>></a>
                              </p>
-                             <ul>
-                               <li style="font-weight: bold;">Parameters</li></ul>
-                                 <li>message - data to be sent</li>
-                                 <li>type - type of the data</li>
-                                 <li>options -this parameter is optional</li>
-               
-                               <li style="font-weight: bold;">Options</li>
-                               <ul>
-                                 <li>receiverID - receiver of the data</li>
-                                 <li>
-                                   application - name of the application sending the general
-                                   data
-                                 </li>
-                                 <li>comment - user comment for the data</li>
-                               </ul>
-                             </ul>
-               
-                             <p>Syntax:</p>
-                             <p class="syntax">
-                               floCloudAPI.sendGeneralData(message, type, options = {})
-                             </p>
+                             <p><b>Syntax :</b> floCloudAPI.sendGeneralData(message, type, options = {})</p>
                            </div>
                
                            <div class="demoSendGeneralData demoArea">
@@ -1484,56 +1522,18 @@
                                class="demo-inner-blocks comment"
                              ></sm-input>
                
-                             <sm-button variant="primary" id="sendUserMessage">Send</sm-button>
+                             <sm-button variant="primary" id="sendUserMessage">SEND</sm-button>
                            </div><br><br>
                
                            <div id="requestGeneralDataBlock" class="descriptionBlocks">
-                             <h2>requestGeneralData</h2>
+                             <h3>Request General Data</h3><br>
                              <p>
-                               requestGeneralData requests application data from the cloud.
+                                Request General Data requests application data from the cloud.<br>
                                <a onclick="displayPopUp('requestGeneralDataPopUp')" class="read"
-                                 >Read more about requestGeneralData >></a
-                               >
+                                 >Read more about Request General Data>>></a>
                              </p>
-                             <ul>
-                               <li>Parameters</li>
-                               <ol>
-                                 <li>type - type of the data</li>
-                                 <li>options -this parameter is optional</li>
-                               </ol>
-               
-                               <li>Options</li>
-                               <ol>
-                                 <li>
-                                   receiverID - receiver FLO ID of the data. ReceiverID is
-                                   always a single value in our cloud design.
-                                 </li>
-                                 <li>
-                                   senderIDs - array of senderIDs. This must be in an array
-                                   even if a single senderID is requested
-                                 </li>
-                                 <li>
-                                   application - name of the application that sent the general
-                                   data
-                                 </li>
-                                 <li>comment - user comment for the data</li>
-                                 <li>
-                                   lowerVectorClock - VC from which the data is to be requested
-                                 </li>
-                                 <li>
-                                   upperVectorClock - VC till which the data is to be requested
-                                 </li>
-                                 <li>atVectorClock - VC at which the data is to requested</li>
-                                 <li>
-                                   mostRecent - boolean (true: request only the recent data
-                                   matching the pattern. Just the last one)
-                                 </li>
-                               </ol>
-                             </ul>
-                             <p>Syntax:</p>
-                             <p class="syntax">
-                               floCloudAPI.requestGeneralData(type, options = {})
-                             </p>
+
+                             <p><b>Syntax :</b> floCloudAPI.requestGeneralData(type, options = {}) </p>
                            </div>
                
                            <div class="demoRequestGeneralData demoArea">
@@ -1597,62 +1597,39 @@
                              ></sm-input>
                
                              <sm-button variant="primary" id="requestUserMessage">
-                               Request
+                               REQUEST
                              </sm-button>
                            </div>
                     </section>
                     <section>
                         <sm-carousel>
                             <div class="card">
-                              <a href="#resetObjectDataBlock" class="smcrsl"><h3>Reset Object Data</h3></a>  
+                              <a href="#resetObjectDataBlock" ><h3>Reset Object Data</h3></a>  
                                 <p>
                                     resetObjectData resets the objectData to cloud
                                 </p>
                             </div>
                             <div class="card">
-                                <a href="#updateObjectDataBlock" class="smcrsl"> <h3>Update Object Data</h3></a>  
+                                <a href="#updateObjectDataBlock" > <h3>Update Object Data</h3></a>  
                                 <p>
                                     updateObjectData updates the objectData to cloud.
                                 </p>
                             </div>
                             <div class="card">
-                                <a href="#requestObjectDataBlock" class="smcrsl">  <h3>Request Object Data</h3></a>  
+                                <a href="#requestObjectDataBlock">  <h3>Request Object Data</h3></a>  
                                 <p>
                                     requestObjectData requests application data from the cloud.
                                 </p>
                             </div>
                         </sm-carousel><br>
                         <div id="resetObjectDataBlock" class="descriptionBlocks">
-                            <h2>resetObjectData</h2>
+                            <h3>Reset Object Data</h3><br>
                             <p>
-                              resetObjectData resets the objectData to cloud.
+                                Reset Object Data resets the objectData to cloud.<br>
                               <a onclick="displayPopUp('ObjectDataPopUp')" class="read"
-                                >Read more about resetObjectData >></a
-                              >
+                                >Read more about resetObjectData>>></a>
                             </p>
-                            <ul>
-                              <li>Parameters</li>
-                              <ol>
-                                <li>
-                                  "objectName" - Name of the objectData to be updated. Quotes
-                                  are must.
-                                </li>
-                                <li>options -this parameter is optional</li>
-                              </ol>
-              
-                              <li>Options</li>
-                              <ol>
-                                <li>receiverID - receiver of the data</li>
-                                <li>
-                                  application - name of the application sending the general
-                                  data
-                                </li>
-                                <li>comment - user comment for the data</li>
-                              </ol>
-                            </ul>
-                            <p>Syntax:</p>
-                            <p class="syntax">
-                              floCloudAPI.resetObjectData("objectName", options = {})
+                            <p><b>Syntax :</b> floCloudAPI.resetObjectData("objectName", options = {})
                             </p>
                           </div>
               
@@ -1666,8 +1643,7 @@
                             </sm-input>
               
                             <div class="keyValuePairs" id="resetKeyValueBlock">
-                              <h4>Key-Value Pairs</h4>
-                              <p>Write the key value pairs for the Object.</p>
+                              <h4 align="center">Key-Value Pairs</h4>
                               <div id="pair1" class="pairs">
                                 <sm-input
                                   placeholder="Key"
@@ -1680,7 +1656,7 @@
                                   placeholder="Value"
                                   type="text"
                                   animate
-                                  class="object-inner-blocks value"
+                                  class="object-inner-blocks value value11"
                                 >
                                 </sm-input>
                                 <div
@@ -1715,41 +1691,19 @@
                               class="demo-inner-blocks comment"
                             ></sm-input>
                             <sm-button variant="primary" id="resetObjectData"
-                              >Reset</sm-button
+                              >RESET</sm-button
                             >
                           </div><br><br>
               
                           <div id="updateObjectDataBlock" class="descriptionBlocks">
-                            <h2>updateObjectData</h2>
+                            <h3>Update Object Data</h3><br>
                             <p>
-                              updateObjectData updates the objectData to cloud.
+                                Update Object Data updates the objectData to cloud.<br>
                               <a onclick="displayPopUp('ObjectDataPopUp')" class="read"
-                                >Read more about updateObjectData >></a
+                                >Read more about updateObjectData>>></a
                               >
                             </p>
-                            <ul>
-                              <li>Parameters</li>
-                              <ol>
-                                <li>
-                                  "objectName" - Name of the objectData to be updated. Quotes
-                                  are must.
-                                </li>
-                                <li>options -this parameter is optional</li>
-                              </ol>
-              
-                              <li>Options</li>
-                              <ol>
-                                <li>receiverID - receiver of the data</li>
-                                <li>
-                                  application - name of the application sending the general
-                                  data
-                                </li>
-                                <li>comment - user comment for the data</li>
-                              </ol>
-                            </ul>
-                            <p>Syntax:</p>
-                            <p class="syntax">
-                              floCloudAPI.updateObjectData("objectName", options = {})
+                            <p><b>Syntax : </b>floCloudAPI.updateObjectData("objectName", options = {})
                             </p>
                           </div>
               
@@ -1763,8 +1717,7 @@
                             </sm-input>
               
                             <div class="keyValuePairs" id="updateKeyValueBlock">
-                              <h4>Key-Value Pairs</h4>
-                              <p>Write the key value pairs for the Object.</p>
+                              <h4 align="center">Key-Value Pairs</h4>
                               <div id="pair1" class="pairs">
                                 <sm-input
                                   placeholder="Key"
@@ -1777,7 +1730,7 @@
                                   placeholder="Value"
                                   type="text"
                                   animate
-                                  class="object-inner-blocks value"
+                                  class="object-inner-blocks value11"
                                 >
                                 </sm-input>
                                 <div
@@ -1819,51 +1772,14 @@
               
                           <div id="requestObjectDataBlock"
                            class="descriptionBlocks">
-                            <h2>requestObjectData</h2>
+                            <h3>Request Object Data</h3><br>
                             <p>
-                              requestObjectData requests application data from the cloud.
+                                Request Object Data requests application data from the cloud.
                               <a onclick="displayPopUp('requestObjectDataPopUp')" class="read"
-                                >Read more about requestObjectData >></a
+                                >Read more about requestObjectData>>></a
                               >
                             </p>
-                            <ul>
-                              <li>Parameters</li>
-                              <ol>
-                                <li>
-                                  "objectName" - Name of the objectData to be requested.
-                                  Quotes are must.
-                                </li>
-                                <li>options -this parameter is optional</li>
-                              </ol>
-              
-                              <li>Options</li>
-                              <ol>
-                                <li>receiverID - receiver of the data</li>
-                                <li>
-                                  senderIDs - array of senderIDs. This must be in an array
-                                  even if a single senderID is requested
-                                </li>
-                                <li>
-                                  application - name of the application sending the general
-                                  data
-                                </li>
-                                <li>comment - user comment for the data</li>
-                                <li>
-                                  lowerVectorClock - VC from which the data is to be requested
-                                </li>
-                                <li>
-                                  upperVectorClock - VC till which the data is to be requested
-                                </li>
-                                <li>atVectorClock - VC at which the data is to requested</li>
-                                <li>
-                                  mostRecent - boolean (true: request only the recent data
-                                  matching the pattern. Just the last one.)
-                                </li>
-                              </ol>
-                            </ul>
-                            <p>Syntax:</p>
-                            <p class="syntax">
-                              floCloudAPI.requestObjectData("objectName", options = {})
+                            <p><b>Syntax : </b>floCloudAPI.requestObjectData("objectName", options = {})
                             </p>
                           </div>
               
@@ -1926,7 +1842,7 @@
                               animate
                               class="demo-inner-blocks upperVectorClock"></sm-input>
               
-                            <sm-button variant="primary" id="requestObjectData">Request</sm-button>
+                            <sm-button variant="primary" id="requestObjectData">REQUEST</sm-button>
                           </div><br><br><br>
                     </section>
                 </sm-tab-panels>
@@ -1976,6 +1892,7 @@
 
             floDapps.launchStartUp().then(result => {
                 console.log(result)
+              myFloID=prompt("Enter your FLO ID");
                 alert(`Welcome FLO_ID: ${myFloID}`)
                 //App functions....
             }).catch(error => console.error(error))

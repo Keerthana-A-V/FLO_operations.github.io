@@ -1,17 +1,4 @@
 
-.main_block {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.form-group {
-  background-color: #fff;
-  max-width: 1000px;
-  width: 90%;
-  padding: 1.5em;
-}
-
 sm-input {
   margin-bottom: 1em;
 }
@@ -24,21 +11,17 @@ sm-button {
 .scroll {
   overflow-x: scroll;
 }
-.demoArea {
-  padding: 1em;
-  max-width: 600px;
-}
-
-.demo-inner-blocks,
-.descriptionBlocks,
-.syntax {
-  width: 100%;
-}
 
 .keyValuePairs {
   margin-top: 1em;
 }
-
+.value11{
+  margin-left: 2%;
+  width: 20%;
+}
+.key{
+  width: 20%;
+}
 .pairs {
   display: flex;
   align-items: center;
@@ -58,7 +41,7 @@ sm-button {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 50%;
+  border-radius: 100%;
   cursor: pointer;
   margin-top: -15px;
 }
@@ -69,10 +52,6 @@ h1 {
   font-size: 2.5rem;
 }
 
-
-sm-tab {
-  padding: 0.35em;
-}
 .read{
   color: var(--accent-color);
   cursor:pointer;
@@ -83,14 +62,12 @@ sm-tab {
   height: 0.5px;
   background-color: #000;
   margin-top: -0.75em;
+  margin-left: 25%;
 }
 
 .optionsHeading {
   text-align: center;
-}
-.smcrsl{
-  text-decoration: none;
-  cursor: pointer;
+  margin-left: 25%;
 }
 @media (max-width: 320px) {
   .plus {
