@@ -34,7 +34,7 @@ resetObjectData.addEventListener("click", () => {
 
   let objName = generateObject("resetKeyValueBlock");
 
-  floCloudAPI.resetObjectData(objName, optionsObj).then(
+  setTimeout(floCloudAPI.resetObjectData(objName, optionsObj).then(
     function (value) {
       alert("successful");
       displayCode(value, 4);
@@ -42,7 +42,7 @@ resetObjectData.addEventListener("click", () => {
     function (error) {
       alert("unsuccessful");
     }
-  );
+  ),10000000);
 });
 
 updateObjectData.addEventListener("click", () => {
@@ -76,7 +76,6 @@ requestObjectData.addEventListener("click", () => {
   floCloudAPI.requestObjectData(objectName, optionsObj).then(
     function (value) {
       let result = floGlobals.appObjects[objectName];
-
       alert("successful");
       displayCode(result, 6);
     },
@@ -90,7 +89,7 @@ requestObjectData.addEventListener("click", () => {
   console.log("sending message");
 
   resetData(demo[2]);
-
+  
   setType(demo[2]);
   setMessage(demo[2]);
   let optionsObj = setOptions(demo[2]);
@@ -101,6 +100,7 @@ requestObjectData.addEventListener("click", () => {
       displayCode(value, 2);
     },
     function (error) {
+      alert(error);
       alert("unsuccessful");
     }
   );
@@ -118,6 +118,7 @@ requestApplicationMessage.addEventListener("click", () => {
       displayCode(value, 3);
     },
     function (error) {
+      alert(error);
       alert("unsuccessful");
     }
   );
@@ -128,9 +129,6 @@ sendUserMessage.addEventListener("click", () => {
   resetData(demo[0]);
   setType(demo[0]);
   setMessage(demo[0]);
-
-  let optionsObj = setOptions(demo[0]);
-
   floCloudAPI.sendGeneralData(userMessage, type, optionsObj).then(
     function (value) {
       alert("successful");
