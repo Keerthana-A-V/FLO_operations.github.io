@@ -15,17 +15,19 @@ sm-button {
 .keyValuePairs {
   margin-top: 1em;
 }
-.value11{
+.value111{
   margin-left: 2%;
   width: 20%;
 }
 .key{
   width: 20%;
 }
+
 .pairs {
   display: flex;
   align-items: center;
   margin-top: 1em;
+  
 }
 
 .object-inner-blocks {
@@ -129,4 +131,19 @@ h1 {
     padding-bottom: 0.5em;
     font-size: 2rem;
   }
+}
+
+.demo-inner-blocks1{
+  font-weight: bold;
+  margin-left: 20%;
+  margin-right: 20%;
+}
+@media screen and (max-width:900px){
+  .demo-inner-blocks1{
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+}
+.otpr{
+  margin-left: 40%;
 }

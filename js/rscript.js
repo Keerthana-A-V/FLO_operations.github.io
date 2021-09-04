@@ -34,15 +34,14 @@ resetObjectData.addEventListener("click", () => {
 
   let objName = generateObject("resetKeyValueBlock");
 
-  setTimeout(floCloudAPI.resetObjectData(objName, optionsObj).then(
+  floCloudAPI.resetObjectData(objName, optionsObj).then(
     function (value) {
-      alert("successful");
       displayCode(value, 4);
     },
     function (error) {
-      alert("unsuccessful");
+      displaycode1("errreset");
     }
-  ),10000000);
+  )
 });
 
 updateObjectData.addEventListener("click", () => {
@@ -56,14 +55,14 @@ updateObjectData.addEventListener("click", () => {
 
   floCloudAPI.updateObjectData(objName, optionsObj).then(
     function (value) {
-      alert("successful");
       displayCode(value, 5);
     },
     function (error) {
-      alert("unsuccessful");
+      displaycode1("errobjupd");
     }
   );
 });
+
 
 requestObjectData.addEventListener("click", () => {
   console.log("sending message");
@@ -76,11 +75,10 @@ requestObjectData.addEventListener("click", () => {
   floCloudAPI.requestObjectData(objectName, optionsObj).then(
     function (value) {
       let result = floGlobals.appObjects[objectName];
-      alert("successful");
       displayCode(result, 6);
     },
     function (error) {
-      alert("unsuccessful");
+      displaycode1("reqerrobj")
     }
   );
 });
@@ -96,12 +94,10 @@ requestObjectData.addEventListener("click", () => {
 
   floCloudAPI.sendApplicationData(userMessage, type, optionsObj).then(
     function (value) {
-      alert("successful");
       displayCode(value, 2);
     },
     function (error) {
-      alert(error);
-      alert("unsuccessful");
+      displaycode1("demo-inner-blocks12")
     }
   );
 });
@@ -114,12 +110,10 @@ requestApplicationMessage.addEventListener("click", () => {
 
   floCloudAPI.requestApplicationData(optionsObj).then(
     function (value) {
-      alert("successful");
       displayCode(value, 3);
     },
     function (error) {
-      alert(error);
-      alert("unsuccessful");
+      displaycode1("errrequest")
     }
   );
 });
@@ -129,13 +123,14 @@ sendUserMessage.addEventListener("click", () => {
   resetData(demo[0]);
   setType(demo[0]);
   setMessage(demo[0]);
+  let optionsObj = setOptions(demo[0]);
+
   floCloudAPI.sendGeneralData(userMessage, type, optionsObj).then(
     function (value) {
-      alert("successful");
       displayCode(value, 0);
     },
     function (error) {
-      alert("unsuccessful");
+      displaycode1("errsendgen")
     }
   );
 });
@@ -149,12 +144,10 @@ requestUserMessage.addEventListener("click", () => {
 
   floCloudAPI.requestGeneralData(type, optionsObj).then(
     function (value) {
-      alert("successful");
-
       displayCode(value, 1);
     },
     function (error) {
-      alert("unsuccessful");
+      displaycode1("errreqgen");
     }
   );
 });
@@ -169,11 +162,11 @@ function displayCode(value, index) {
 
   outputBlock.classList.add("scroll");
   codeBlock.classList.add("scroll");
-  outputBlock.classList.add("demo-inner-blocks");
-  codeBlock.classList.add("demo-inner-blocks");
+  outputBlock.classList.add("demo-inner-blocks1");
+  codeBlock.classList.add("demo-inner-blocks1");
 
-  codeLabel.innerHTML = "Code:";
-  outputLabel.innerHTML = "Output:";
+  codeLabel.innerHTML = "<b class='otpr'>Code:</b>";
+  outputLabel.innerHTML = "<b class='otpr'>Output:</b>";
   outputBlock.innerHTML = JSON.stringify(value, undefined, 4);
 
   if (index == 0) {
@@ -198,6 +191,9 @@ function displayCode(value, index) {
   frag.appendChild(outputBlock);
 
   demoBlock.appendChild(frag);
+}
+function displaycode1(id6){
+  document.getElementById(id6).innerHTML = "<br><b>Unsuccessfull!!<br>Kindly check if all the inputs are correct!</b><br>Also try restarting the page!";
 }
 
 function addKeyValuePairs(id, pairId, index) {
@@ -225,7 +221,7 @@ function generateObject(id) {
 
   pairs.forEach((pair) => {
     let key = pair.querySelector(".key").value;
-    let value = pair.querySelector(".value").value;
+    let value = pair.querySelector(".value111").value;
 
     obj[key] = value;
   });
@@ -234,6 +230,7 @@ function generateObject(id) {
 
   return objUser;
 }
+
 
 function setType(blockID) {
   let block = document.querySelector("." + blockID);
